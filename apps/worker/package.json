@@ -1,0 +1,46 @@
+{
+  "name": "@whatsapp-business/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "nest start",
+    "build": "nest build",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --passWithNoTests --runInBand"
+  },
+  "dependencies": {
+    "@nestjs/bullmq": "latest",
+    "@nestjs/common": "latest",
+    "@nestjs/config": "latest",
+    "@nestjs/core": "latest",
+    "@whatsapp-business/shared": "file:../../packages/shared",
+    "bullmq": "latest",
+    "ioredis": "latest",
+    "joi": "latest",
+    "reflect-metadata": "latest",
+    "rxjs": "latest"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "latest",
+    "@nestjs/schematics": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "jest": "latest",
+    "ts-jest": "latest",
+    "ts-loader": "latest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "testEnvironment": "node"
+  }
+}
