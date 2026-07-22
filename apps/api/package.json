@@ -1,0 +1,62 @@
+{
+  "name": "@whatsapp-business/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "nest start",
+    "build": "nest build",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --runInBand",
+    "prisma:generate": "prisma generate",
+    "start:dev": "nest start --watch"
+  },
+  "dependencies": {
+    "@nestjs/bullmq": "^11.0.4",
+    "@nestjs/common": "^11.1.28",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.28",
+    "@nestjs/platform-express": "^11.1.28",
+    "@nestjs/swagger": "^11.4.6",
+    "@prisma/client": "6.19.3",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@whatsapp-business/shared": "file:../../packages/shared",
+    "bullmq": "^5.80.10",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "ioredis": "^5.11.1",
+    "joi": "^18.2.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.24",
+    "@nestjs/schematics": "^11.1.0",
+    "@nestjs/testing": "^11.1.28",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.13.3",
+    "jest": "^30.4.2",
+    "prisma": "6.19.3",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.12",
+    "ts-loader": "^9.6.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.(t|j)s"
+    ],
+    "testEnvironment": "node"
+  }
+}
