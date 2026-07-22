@@ -18,23 +18,31 @@ child.on('exit', (code) => {
   if (code !== null && code !== 0) process.exit(code);
 });
 
-async function waitForSwagger() {
+async function waitForApiReadiness() {
   const deadline = Date.now() + 10_000;
   while (Date.now() < deadline) {
     if (exited) throw new Error('API process exited before readiness check completed.');
     try {
-      const response = await fetch(`http://127.0.0.1:${env.PORT}/docs`);
-      if (response.ok) return;
+      const healthResponse = await fetch(`http://127.0.0.1:${env.PORT}/health`);
+      const healthBody = await healthResponse.json();
+      const docsResponse = await fetch(`http://127.0.0.1:${env.PORT}/docs`);
+      if (
+        healthResponse.ok &&
+        healthBody.status === 'ok' &&
+        Object.keys(healthBody).length === 1 &&
+        docsResponse.ok
+      )
+        return;
     } catch {
       // Retry until the process binds the port or the deadline expires.
     }
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
-  throw new Error('API did not serve Swagger docs before the smoke timeout.');
+  throw new Error('API did not serve health and Swagger docs before the smoke timeout.');
 }
 
 try {
-  await waitForSwagger();
+  await waitForApiReadiness();
   console.log('API smoke readiness succeeded.');
   child.kill('SIGTERM');
 } catch (error) {

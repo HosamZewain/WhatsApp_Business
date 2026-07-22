@@ -3,6 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CorrelationIdMiddleware } from './correlation-id.middleware';
 import { envValidationSchema } from './env.validation';
+import { HealthController } from './health.controller';
 import { PrismaService } from './prisma.service';
 
 @Module({
@@ -18,7 +19,7 @@ import { PrismaService } from './prisma.service';
       }),
     }),
   ],
-  controllers: [],
+  controllers: [HealthController],
   providers: [PrismaService],
 })
 export class AppModule implements NestModule {
