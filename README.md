@@ -21,6 +21,7 @@ Use Node.js `24.18.0` from `.nvmrc` / `.node-version` and npm 10 or newer.
 cp .env.example .env
 npm install
 npm run prisma:generate --workspace @whatsapp-business/api
+npx playwright install --with-deps chromium
 npm run verify
 npm run test:e2e
 ```

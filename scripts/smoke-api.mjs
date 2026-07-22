@@ -12,12 +12,33 @@ const env = {
 };
 
 const child = spawn(process.execPath, ['apps/api/dist/src/main.js'], { env, stdio: 'inherit' });
-const timeout = setTimeout(() => {
-  child.kill('SIGTERM');
-  console.log('API smoke start succeeded.');
-}, 3000);
-child.on('exit', (code, signal) => {
-  clearTimeout(timeout);
-  if (signal === 'SIGTERM') process.exit(0);
-  process.exit(code ?? 1);
+let exited = false;
+child.on('exit', (code) => {
+  exited = true;
+  if (code !== null && code !== 0) process.exit(code);
 });
+
+async function waitForSwagger() {
+  const deadline = Date.now() + 10_000;
+  while (Date.now() < deadline) {
+    if (exited) throw new Error('API process exited before readiness check completed.');
+    try {
+      const response = await fetch(`http://127.0.0.1:${env.PORT}/docs`);
+      if (response.ok) return;
+    } catch {
+      // Retry until the process binds the port or the deadline expires.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  throw new Error('API did not serve Swagger docs before the smoke timeout.');
+}
+
+try {
+  await waitForSwagger();
+  console.log('API smoke readiness succeeded.');
+  child.kill('SIGTERM');
+} catch (error) {
+  child.kill('SIGTERM');
+  console.error(error);
+  process.exit(1);
+}

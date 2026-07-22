@@ -4,6 +4,7 @@ import { WorkerModule } from './worker.module';
 
 async function bootstrap() {
   await NestFactory.createApplicationContext(WorkerModule);
+  console.log('Worker application context ready.');
 }
 
 void bootstrap();
