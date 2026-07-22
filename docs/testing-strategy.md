@@ -1,9 +1,13 @@
-# testing strategy
+# Testing Strategy
 
-This document is part of the Issue #3 foundation and defines project guardrails without implementing Issue #1 business behavior.
+## Test layers
 
-## Rules
+- Unit tests validate isolated NestJS and React behavior.
+- Type checks validate workspace contracts and shared package consumption.
+- Playwright E2E tests validate the browser foundation route.
+- Smoke scripts prove built API, Worker, and Web processes can start.
+- Docker Compose smoke checks validate local infrastructure and service build commands.
 
-- Keep the API in NestJS, the web app in React with Vite, and background processing in the worker app.
-- Keep shared types and constants in `packages/shared`.
-- Prefer strict TypeScript, automated tests, and documented environment configuration.
+## Commands
+
+Run `npm run verify` for format, lint, typecheck, unit test, Prisma generation, and build checks. Run `npm run test:e2e` for browser E2E coverage after Playwright Chromium is installed.

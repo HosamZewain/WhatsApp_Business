@@ -7,8 +7,25 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   prettier,
+
   {
-    languageOptions: { parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname } },
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        clearTimeout: 'readonly',
+        console: 'readonly',
+        process: 'readonly',
+        setTimeout: 'readonly',
+      },
+    },
+  },
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: { allowDefaultProject: ['scripts/*.mjs'] },
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     rules: { '@typescript-eslint/no-floating-promises': 'error' },
   },
 );

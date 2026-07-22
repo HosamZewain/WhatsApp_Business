@@ -1,9 +1,14 @@
-# product scope
+# Product Scope
 
-This document is part of the Issue #3 foundation and defines project guardrails without implementing Issue #1 business behavior.
+This repository currently covers the Issue #3 foundation only. It establishes the runtime, tooling, quality gates, and documentation needed before product features are added.
 
-## Rules
+## In scope
 
-- Keep the API in NestJS, the web app in React with Vite, and background processing in the worker app.
-- Keep shared types and constants in `packages/shared`.
-- Prefer strict TypeScript, automated tests, and documented environment configuration.
+- Monorepo structure for API, Worker, Web, and Shared packages.
+- Framework wiring for NestJS, React, Vite, Prisma, Redis, BullMQ, Jest, Vitest, Playwright, ESLint, and Prettier.
+- Environment validation, error envelopes, correlation IDs, CI, Docker Compose, and startup smoke checks.
+
+## Out of scope
+
+- WhatsApp account onboarding, message sending, contacts, templates, campaigns, webhooks, billing, reporting, or analytics.
+- Any endpoint, queue, schema model, UI flow, or background job that represents business behavior.

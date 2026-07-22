@@ -22,7 +22,16 @@ cp .env.example .env
 npm install
 npm run prisma:generate --workspace @whatsapp-business/api
 npm run verify
+npm run test:e2e
 ```
+
+## Development
+
+```bash
+npm run dev
+```
+
+Smoke scripts are available with `npm run smoke:api`, `npm run smoke:worker`, `npm run smoke:web`, and `npm run smoke:compose`.
 
 ## Docker Compose
 

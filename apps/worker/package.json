@@ -7,28 +7,29 @@
     "start": "nest start",
     "build": "nest build",
     "typecheck": "tsc --noEmit",
-    "test": "jest --passWithNoTests --runInBand"
+    "test": "jest --passWithNoTests --runInBand",
+    "start:dev": "nest start --watch"
   },
   "dependencies": {
-    "@nestjs/bullmq": "latest",
-    "@nestjs/common": "latest",
-    "@nestjs/config": "latest",
-    "@nestjs/core": "latest",
+    "@nestjs/bullmq": "^11.0.4",
+    "@nestjs/common": "^11.1.28",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.28",
     "@whatsapp-business/shared": "file:../../packages/shared",
-    "bullmq": "latest",
-    "ioredis": "latest",
-    "joi": "latest",
-    "reflect-metadata": "latest",
-    "rxjs": "latest"
+    "bullmq": "^5.80.10",
+    "ioredis": "^5.11.1",
+    "joi": "^18.2.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@nestjs/cli": "latest",
-    "@nestjs/schematics": "latest",
-    "@types/jest": "latest",
-    "@types/node": "latest",
-    "jest": "latest",
-    "ts-jest": "latest",
-    "ts-loader": "latest"
+    "@nestjs/cli": "^11.0.24",
+    "@nestjs/schematics": "^11.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.1.1",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.12",
+    "ts-loader": "^9.6.2"
   },
   "jest": {
     "moduleFileExtensions": [

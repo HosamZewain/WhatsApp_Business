@@ -8,23 +8,32 @@
     "npm": ">=10"
   },
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
+    "dev": "npm run build --workspace @whatsapp-business/shared && concurrently -k -n api,worker,web \"npm run start:dev --workspace @whatsapp-business/api\" \"npm run start:dev --workspace @whatsapp-business/worker\" \"npm run dev --workspace @whatsapp-business/web\"",
+    "format:check": "prettier --check .",
     "prisma:generate": "npm run prisma:generate --workspace @whatsapp-business/api",
     "lint": "eslint .",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
-    "verify": "npm run prisma:generate && npm run lint && npm run typecheck && npm run test && npm run build"
+    "typecheck": "npm run build --workspace @whatsapp-business/shared && npm run typecheck --workspaces --if-present",
+    "test": "npm run build --workspace @whatsapp-business/shared && npm run test --workspaces --if-present",
+    "test:e2e": "npm run build --workspace @whatsapp-business/shared && npm run test:e2e --workspace @whatsapp-business/web",
+    "build": "npm run build --workspace @whatsapp-business/shared && npm run build --workspace @whatsapp-business/api && npm run build --workspace @whatsapp-business/worker && npm run build --workspace @whatsapp-business/web",
+    "verify": "npm run prisma:generate && npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "smoke:api": "node scripts/smoke-api.mjs",
+    "smoke:worker": "node scripts/smoke-worker.mjs",
+    "smoke:web": "node scripts/smoke-web.mjs",
+    "smoke:compose": "bash scripts/compose-smoke.sh"
   },
   "devDependencies": {
-    "@eslint/js": "latest",
-    "eslint": "latest",
-    "eslint-config-prettier": "latest",
-    "prettier": "latest",
-    "typescript": "latest",
-    "typescript-eslint": "latest"
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "wait-on": "^9.1.0"
   }
 }

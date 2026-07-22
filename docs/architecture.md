@@ -1,9 +1,17 @@
-# architecture
+# Architecture
 
-This document is part of the Issue #3 foundation and defines project guardrails without implementing Issue #1 business behavior.
+The project is a TypeScript monorepo with separate application and package boundaries.
 
-## Rules
+## Applications
 
-- Keep the API in NestJS, the web app in React with Vite, and background processing in the worker app.
-- Keep shared types and constants in `packages/shared`.
-- Prefer strict TypeScript, automated tests, and documented environment configuration.
+- `apps/api`: NestJS HTTP API. It owns API middleware, validation, Swagger/OpenAPI, filters, and future HTTP modules.
+- `apps/worker`: NestJS application-context worker. It owns BullMQ processors and Redis-backed background execution.
+- `apps/web`: React + Vite browser application. It owns routing, UI composition, browser tests, and static assets.
+
+## Shared package
+
+`packages/shared` contains framework-neutral constants and contracts that can be consumed by both CommonJS NestJS apps and the ESM web app after building to `dist`.
+
+## Runtime dependencies
+
+PostgreSQL is accessed through Prisma. Redis supports BullMQ and worker coordination. Docker Compose provides local infrastructure and service startup smoke coverage.

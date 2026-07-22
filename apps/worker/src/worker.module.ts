@@ -17,7 +17,10 @@ import { MaintenanceProcessor } from './maintenance.processor';
     BullModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        connection: { host: config.getOrThrow<string>('REDIS_HOST'), port: config.getOrThrow<number>('REDIS_PORT') },
+        connection: {
+          host: config.getOrThrow<string>('REDIS_HOST'),
+          port: config.getOrThrow<number>('REDIS_PORT'),
+        },
       }),
     }),
     BullModule.registerQueue({ name: 'maintenance' }),
